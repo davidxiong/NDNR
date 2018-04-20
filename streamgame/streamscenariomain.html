@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<!--
+	NOTES:
+	1. All tokens are represented by '$' sign in the template.
+	2. You can write your code only wherever mentioned.
+	3. All occurrences of existing tokens will be replaced by their appropriate values.
+	4. Blank lines will be removed automatically.
+	5. Remove unnecessary comments before creating your template.
+-->
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="authoring-tool" content="Adobe_Animate_CC">
+<title>Stream Depletion Games</title>
+<!-- write your code here -->
+<script src="createjs-2015.11.26.min.js"></script>
+<script src="jquery.min.js"></script>
+<link rel="stylesheet" href="jquery-ui.css">
+<script src="jquery-ui.min.js"></script>
+<link rel="stylesheet" href="streamscenariomain.css">
+<script src="StreamScenes.js"></script>
+<script src="streamtutorial.js"></script>
+<script src="streamwelcomepage.js"></script>
+<script src="streamscenario.js"></script>
+<script src="streamscenariomain.js"></script>
+<!-- write your code here -->
+</head>
+<body onload="init();">
+<div id="wpbkgshade">
+ <div id="wpwelcomepage">
+  <img id="wpbranddesignimg" src="images/branddesign.png" alt="Brand design elements">
+  <div id="wpheadpane">Stream Depletions from Pumping</div>
+  <div id="wpmainpane">
+    <p><b>Welcome!</b><br>NeDNR has developed computer simulations to illustrate how groundwater pumping may <span class="tooltip">deplete<span class="tooltiptext">Stream depletion is reduction in streamflow due to groundwater pumping in a system in which surface water and groundwater are connected.</span></span> streamflow under three different hydrologic systems: <span class="tooltip">gaining stream<span class="tooltiptext">A gaining stream is one where water flows from the aquifer towards the stream.</span></span>, <span class="tooltip">losing stream<span class="tooltiptext">A losing stream is one where water flows from a stream towards the aquifer.</span></span>, and <span class="tooltip">disconnected stream<span class="tooltiptext">A disconnected stream is separated from the water table by unsaturated soil or rock.</span></span>. To begin, explore how a gaining stream responds to pumping.</p>
+    <p><b>Gaining Stream</b><br>The purpose of the first simulation is to depict the relationship between groundwater pumping and the flow of a gaining stream. Change the well location and adjust pumping, then observe how the stream depth and <span class="tooltip">water table<span class="tooltiptext">The upper level of the underground area in which the soil and rocks are saturated with water.</span></span> respond.</p>
+    <img id="wpstreamimg" src="images/wpageG.jpeg" alt="Stream pumping illustration">
+  </div>
+  <div id="wpfootpane" onclick="wpdone()">OK</div>
+ </div>
+</div>
+<div>
+  <canvas id="canvas"></canvas>
+  <form action="#">
+    <fieldset>
+      <select name="sceneoptions" id="sceneoptions" autocomplete="off">
+        <option value="Gaining Stream" selected="selected">Gaining Stream</option>
+        <option value="Losing Stream">Losing Stream</option>
+        <option value="Disconnected Stream">Disconnected Stream</option>
+        <option value="Transient Stream">Transient Stream</option>
+      </select>
+    </fieldset>
+  </form>
+  <div id="legendarea">
+    <div class="legendtitle">Legend</div>
+    <!-- The classes legend16, legend24 and legend10 are added to adjust the position of these png files
+         since the sizes of SymWaterTable.png (16x16), symowl.png (24x16) and SymStreamDepth.png (10x32) are different -->
+    <div class="legenditem">
+      <img class="legendfleft legend16" src="images/SymWaterTable.png" alt="Water table symbol"><div class="legendfleft legendptop">Water Table</div>
+    </div>
+    <div class="legenditem">
+      <img class="legendfleft legend24" src="images/symowl.png" alt="Original water level"><div class="legendfleft legendptop">Original Water Level</div>
+    </div>
+    <div class="legenditem">
+      <img class="legendfleft legend10" src="images/SymStreamDepth.png" alt="Stream depth symbol"><div class="legendfleft legendptop2">Stream Depth Indicator</div>
+    </div>
+  </div>
+  <div id="sliderarea" class="visNonT">
+    <div class="floatleft">Well Location:</div>
+    <div id="slidercombo" class="floatleft">
+      <div id="slider"></div>
+      <div class="clearleft">
+        <div id="sliderhtick" class="slider-tick"></div>
+        <div id="slidermtick" class="slider-tick"></div>
+        <div id="sliderltick" class="slider-tick"></div>
+      </div>
+      <div class="clearleft">
+        <div class="sliderlabel sliderFlabel">Far</div>
+        <div class="sliderlabel sliderNlabel">Near</div>
+      </div>
+    </div>
+  </div>
+  <div id="sliderareaT" class="visT">
+    <div class="floatleft">Groundwater<br>Extraction:</div>
+    <div id="slidercomboT" class="floatleft">
+      <div id="sliderT" class="floatleft"></div>
+      <div class="floatleft">
+        <div id="sliderTvhtick" class="sliderT-tick"></div>
+        <div id="sliderThtick" class="sliderT-tick"></div>
+        <div id="sliderTmtick" class="sliderT-tick"></div>
+        <div id="sliderTltick" class="sliderT-tick"></div>
+        <div id="sliderTztick" class="sliderT-tick"></div>
+      </div>
+      <div class="floatleft">
+        <div class="sliderTlabel sliderTvhlabel">Very High</div>
+        <div class="sliderTlabel sliderThlabel">High</div>
+        <div class="sliderTlabel sliderTmlabel">Medium</div>
+        <div class="sliderTlabel sliderTllabel">Low</div>
+        <div class="sliderTlabel sliderTzlabel">Off</div>
+      </div>
+    </div>
+  </div>
+  <div id="pumponoffswitch" class="visNonT">
+    <label class="switch">
+      <input id="pumpcheck" class="switchinput" type="checkbox"/>
+      <span class="switchlabel" data-on="Pump On" data-off="Pump Off"></span>
+      <span class="switchbtn"></span> 
+    </label>
+  </div>
+  <audio id="MySound" src="audios/wpgs.mp3" preload="auto"></audio>
+  <button id="soundonoff" class="button"></button>
+  <button id="turnontutorial" class="button">Turn On Tutorial Mode</button>
+</div>
+<div id="bottomarea">
+  <p class="visG introduction">A gaining stream is one where water flows from the aquifer towards the stream. Pumping intercepts groundwater that would have otherwise flowed to the stream. A well located near a stream is expected to lower the <span class="tooltip">water table<span class="tooltiptext">The upper level of the underground area in which the soil and rocks are saturated with water.</span></span> and reduce the flow of water to the stream from the aquifer. In some cases, the pumping may turn a gaining stream into a <span class="tooltip">losing stream<span class="tooltiptext">A stream where water flows from a stream towards the aquifer.</span></span> by reversing the direction of groundwater flow (see next simulation). While the effects appear immediate in this simulation, they may take years to appear in reality. The farther a well is from a stream, the longer it typically takes for the <span class="tooltip">depletions<span class="tooltiptext">Stream depletion is reduction in streamflow due to groundwater pumping in a system in which surface water and groundwater are connected.</span></span> to affect the stream. The timing also depends on the <span class="tooltip">aquifer material<span class="tooltiptextleft">The soils and rocks that make up an aquifer.</span></span>.</p>
+  <p class="visL introduction">A losing stream is one where water flows from a stream towards the aquifer. The pumping of a well contributes to stream <span class="tooltip">depletion<span class="tooltiptext">Stream depletion is reduction in streamflow due to groundwater pumping in a system in which surface water and groundwater are connected.</span></span> by intercepting groundwater that would have otherwise flowed to the stream. A well located near a stream is expected to further lower the <span class="tooltip">water table<span class="tooltiptext">The upper level of the underground area in which the soil and rocks are saturated with water.</span></span> and increase flow of water from the stream to the aquifer. While the effects appear immediate in this simulation, they may take years to appear in reality. The farther a well is from a stream, the longer it typically takes for the depletions to affect the stream. The timing also depends on the <span class="tooltip">aquifer material<span class="tooltiptextleft">The soils and rocks that make up an aquifer.</span></span>. In some cases groundwater pumping may cause a losing stream to become disconnected by drawing down the water table below the streambed (see next simulation).</p>
+  <p class="visD introduction">A disconnected stream is separated from the <span class="tooltip">water table<span class="tooltiptext">The upper level of the underground area in which the soil and rocks are saturated with water.</span></span> by unsaturated soil or rock. The pumping of a well is expected to draw down the water table, but triggers no stream <span class="tooltip">depletion<span class="tooltiptext">Stream depletion is reduction in streamflow due to groundwater pumping in a system in which surface water and groundwater are connected.</span></span>. The location of a well has no impact on streamflows because the <span class="tooltip">aquifer<span class="tooltiptextleft">The area saturated with water beneath the water table.</span></span> is not connected to the stream. A stream may be naturally disconnected or may become disconnected as a result of groundwater pumping.</p>
+  <p class="visT introduction">Stream connectivity can change as a result of groundwater pumping. No matter where a well is located, if more water is being pumped out of the <span class="tooltip">aquifer<span class="tooltiptextleft">The area saturated with water beneath the water table.</span></span> than is being replaced, the groundwater level will drop. As more water is pumped, the groundwater will drop farther. That change in the aquifer will affect the stream, although it may take longer if the well is farther away. If there is enough pumping, gaining streams can become losing streams, or even disconnected streams. A disconnected stream is a stream that is hydrologically disconnected from the surrounding groundwater; changes in groundwater levels do not affect disconnected streams.</p>
+  <div id="hydrograph">
+    <div id="hgGWYAxis">
+      <div class="hgGWUpArrow"></div>
+      <div class="hgGWYLine"></div>
+    </div>
+    <div id="hgGWYDiff" class="hgDisplay hgGWDisplay">
+      <div class="hgGWDiffUp"></div>
+      <div class="hgGWYDiffLine"></div>
+      <div class="hgGWDiffDown"></div>
+    </div>
+    <div id="lbGWLevel" class="hgGWLabel">Groundwater Level</div>
+    <div id="lbGWaterO" class="hgGWLabel">without pumping</div>
+    <div id="lbGWaterW" class="hgGWLabel hgDisplay hgGWDisplay">with pumping</div>
+    <div id="lbGWDepletion" class="hgGWLabel hgDisplay hgGWDisplay">Depletion</div>
+    <img id="depletionImg" src="images/goff.png" alt="Depletion View">
+    <div id="lbLevel" class="hgLabel">Stream Level</div>
+    <div id="lbDepthO" class="hgLabel">without pumping</div>
+    <div id="lbDepthW" class="hgLabel hgDisplay">with pumping</div>
+    <div id="lbDepletion" class="hgLabel hgDisplay">Depletion</div>
+    <div id="hgYAxis">
+      <div class="hgUpArrow"></div>
+      <div class="hgYLine"></div>
+    </div>
+    <div id="hgYDiff" class="hgDisplay">
+      <div class="hgDiffUp"></div>
+      <div class="hgYDiffLine"></div>
+      <div class="hgDiffDown"></div>
+    </div>
+    <div id="hgGWDotLineT" class="hgGWDotLine"></div>
+    <div id="hgGWDotLineB" class="hgGWDotLine hgDisplay hgGWDisplay"></div>
+    <div id="hgDotLineT" class="hgDotLine"></div>
+    <div id="hgDotLineB" class="hgDotLine hgDisplay"></div>
+    <div id="lbNoDepletion" class="visD hgLabel hgNoDepletion">No depletion</div>
+  </div>
+</div>
+<div id="tutorialpage">
+  <div id="tpagetop"></div>
+  <!-- tpageright (float:right); tpageleft (float:left); they are in one row if we put tpageright before tpageleft -->
+  <div id="tpageright"></div>
+  <div id="tpageleft"></div>
+  <div id="tpagebottom"></div>
+  <div id="tpagesecondr"></div>
+  <div id="tpagesecondl"></div>
+  <div id="tpagesecondb"></div>
+  <div id="tutorialbox">
+    <div id="tutorialhead">Tutorial</div>
+    <div id="tutorialsubhead">Adjust the location of the pumping well</div>
+    <div id="tutorialtext"><p>Adjust the location of the pumping well using this slider or by clicking on the slider's labels.</p><p>The well can be placed at three different distances from the stream.</p></div>
+    <div id="tutorialarrow" class=""></div>
+    <div class="tutorialbuttons">
+      <div id="tutorialnext" class="tutorialbutton">Next</div>
+      <div id="tutorialprevious" class="tutorialbutton">Previous</div>
+      <div id="tutorialexit" class="tutorialbutton">Exit Tutorial</div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

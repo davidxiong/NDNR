@@ -1,0 +1,858 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+fieldset {
+    border: 0;
+    position: absolute;
+    top: 2px;
+    left: 956px;
+}
+
+#canvas {
+    width: 1224px;
+    height: 576px;
+    display: block;
+}
+
+#legendarea {
+    position: absolute;
+    border: 1px solid black;
+    left: 972px;
+    top: 54px;
+    width: 233px;
+    padding: 4px;
+    display: inline-block;
+    font-size: 0.95em;
+    white-space: nowrap;
+    background-color: rgb(185,200,211);
+}
+
+.legendtitle {
+    min-height: 24px;
+    font-weight: bold;
+    text-align: center;
+}
+.legenditem {
+    min-height: 24px;
+}
+.legendfleft {
+    float: left;
+}
+.legend16 {
+    padding: 4px 8px 4px 4px;
+}
+.legend24 {
+    padding: 4px 4px 4px 0;
+}
+.legend10 {
+    padding: 3px 12px 3px 7px;
+}
+.legendptop {
+    padding-top: 3px;
+}
+.legendptop2 {
+    padding-top: 10px;
+}
+
+#sliderarea {
+    position: absolute;
+    left: 30px;
+    top: 50px;
+    display: inline-block;
+}
+#sliderareaT {
+    position: absolute;
+    left: 30px;
+    top: 50px;
+}
+
+#slidercombo {
+    padding-left: 20px;
+}
+#slidercomboT {
+    padding-left: 10px;
+}
+
+#slider {
+    width: 120px;
+    height: 14px;
+}
+#sliderT {
+    width: 14px;
+    height: 165px;
+}
+
+.ui-slider.ui-slider-horizontal {
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(to bottom, rgb(85,85,85), rgb(255,255,255), rgb(85,85,85));
+}
+.ui-slider-horizontal .ui-slider-handle {
+    top: 1px;
+    width: 16px;
+    height: 12px;
+    margin-left: -8px; /* minus half of width */
+    outline: none;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(to bottom, rgb(0,255,255), rgb(0,68,255), rgb(0,255,255));
+}
+
+.ui-slider.ui-slider-vertical {
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(to right, rgb(85,85,85), rgb(255,255,255), rgb(85,85,85));
+}
+.ui-slider-vertical .ui-slider-handle {
+    left: 1px;
+    width: 12px;
+    height: 16px;
+    margin-bottom: -8px; /* minus half of height */
+    outline: none;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(to right, rgb(0,255,255), rgb(0,68,255), rgb(0,255,255));
+}
+
+.slider-tick {
+    width: 0;
+    height: 5px;
+    float: left;
+    border: 1px solid black;
+}
+.sliderT-tick {
+    width: 5px;
+    height: 0;
+    border: 1px solid black;
+}
+
+#slidermtick {
+    margin-left: 57px;
+}
+#sliderltick {
+    margin-left: 58px;
+}
+#sliderTvhtick {
+    margin-top: 4px;
+}
+#sliderThtick {
+    margin-top: 36px;
+}
+#sliderTmtick {
+    margin-top: 38px;
+}
+#sliderTltick {
+    margin-top: 36px;
+}
+#sliderTztick {
+    margin-top: 38px;
+}
+
+.sliderlabel {
+    font-size: 110%;
+    text-align: center;
+    color: rgb(0,0,0);
+    white-space: nowrap;
+    cursor: pointer;
+    float: left;
+    margin-top: -1px;
+}
+.sliderTlabel {
+    padding-left: 10px;
+    font-size: 110%;
+    text-align: left;
+    color: rgb(0,0,0);
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.sliderFlabel {
+    margin-left: -16px;
+}
+.sliderNlabel {
+    margin-left: 93px;
+}
+.floatleft {
+    float: left;
+}
+.clearleft {
+    clear: left;
+}
+.sliderTvhlabel {
+    margin-top: -4px;
+}
+.sliderThlabel {
+    margin-top: 17px;
+}
+.sliderTmlabel {
+    margin-top: 18px;
+}
+.sliderTllabel {
+    margin-top: 17px;
+}
+.sliderTzlabel {
+    margin-top: 20px;
+}
+
+#bottomarea {
+    border: 1px solid black;
+    width: 1222px;
+    height: 216px;
+    background-color: rgb(0,96,127);
+}
+
+.introduction {
+    width: 682px;
+    font-size: 1.1em;
+    text-align: justify;
+    color: rgb(237,240,242);
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.visG {
+    display: block;
+}
+.visL, .visD, .visT, .hgDisplay, .hgGWDisplay {
+    display: none;
+}
+
+#hgGWYAxis {
+    position: absolute;
+    left: 876px;
+    top: 608px;
+}
+#hgGWYAxis .hgGWYLine {
+    margin-left: 2px;
+    border-left: 1px solid rgb(185,200,211);
+    height: 150px;
+}
+#hgGWYDiff {
+    position: absolute;
+    left: 858px;
+    top: 685px;
+}
+#hgGWYDiff .hgGWYDiffLine {
+    margin-left: 2px;
+    border-left: 2px solid rgb(185,200,211);
+    height: 9px;
+}
+#hgYDiff .hgYDiffLine {
+    margin-left: 2px;
+    border-left: 2px solid rgb(255,200,67);
+    height: 9px;
+}
+#lbGWLevel {
+    left: 820px;
+    top: 590px;
+    font-weight: bold;
+}
+#lbGWaterO {
+    left: 780px;
+    top: 663px;
+}
+#lbGWaterW {
+    left: 797px;
+    top: 709px;
+}
+#lbGWDepletion {
+    left: 792px;
+    top: 688px;
+    font-weight: bold;
+    color: rgb(185,200,211);
+}
+.hgGWUpArrow {
+    width: 0;
+    height: 0;
+    border-left: 2px solid transparent;
+    border-right: 3px solid transparent;
+    border-bottom: 6px solid rgb(185,200,211);
+}
+.hgGWDiffUp {
+    width: 0;
+    height: 0;
+    border-left: 3px solid transparent;
+    border-right: 3px solid transparent;
+    border-bottom: 6px solid rgb(185,200,211);
+}
+.hgGWDiffDown {
+    width: 0;
+    height: 0;
+    border-left: 3px solid transparent;
+    border-right: 3px solid transparent;
+    border-top: 6px solid rgb(185,200,211);
+}
+
+#hydrograph img {
+    /* picture size: 142 x 150 */
+    position: absolute;
+    left: 901px;
+    top: 614px;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.hgGWLabel {
+    position: absolute;
+    font-size: 0.8em;
+    color: rgb(185,200,211);
+    text-align: left;
+    vertical-align: middle;
+    background-color: transparent;
+    white-space: nowrap;
+}
+.hgLabel {
+    position: absolute;
+    font-size: 0.8em;
+    color: rgb(255,200,67);
+    text-align: left;
+    vertical-align: middle;
+    background-color: transparent;
+    white-space: nowrap;
+}
+
+#lbLevel {
+    left: 1025px;
+    top: 590px;
+    font-weight: bold;
+}
+#lbDepthO {
+    left: 1070px;
+    top: 669px;
+}
+#lbDepthW {
+    left: 1070px;
+    top: 713px;
+}
+#lbDepletion {
+    left: 1090px;
+    top: 692px;
+    font-weight: bold;
+    color: rgb(255,200,67);
+}
+#lbNoDepletion {
+    left: 1070px;
+    top: 692px;
+    font-weight: bold;
+    color: rgb(255,200,67);
+}
+.hgUpArrow {
+    width: 0;
+    height: 0;
+    border-left: 2px solid transparent;
+    border-right: 3px solid transparent;
+    border-bottom: 6px solid rgb(255,200,67);
+}
+.hgDiffUp {
+    width: 0;
+    height: 0;
+    border-left: 3px solid transparent;
+    border-right: 3px solid transparent;
+    border-bottom: 6px solid rgb(255,200,67);
+}
+.hgDiffDown {
+    width: 0;
+    height: 0;
+    border-left: 3px solid transparent;
+    border-right: 3px solid transparent;
+    border-top: 6px solid rgb(255,200,67);
+}
+#hgYAxis {
+    position: absolute;
+    left: 1061px;
+    top: 608px;
+}
+#hgYAxis .hgYLine {
+    margin-left: 2px;
+    border-left: 1px solid rgb(255,200,67);
+    height: 150px;
+}
+#hgYDiff {
+    position: absolute;
+    left: 1075px;
+    top: 689px;
+}
+.hgDotLine {
+    position: absolute;
+    left: 1043px;
+    border-bottom: 2px dotted rgb(255,200,67);
+    z-index: 2;
+}
+.hgGWDotLine {
+    position: absolute;
+    border-bottom: 2px dotted rgb(185,200,211);
+    z-index: 2;
+}
+#hgGWDotLineT {
+    left: 790px;
+    top: 685px;
+    width: 111px;
+}
+#hgGWDotLineB {
+    left: 851px;
+    top: 704px;
+    width: 50px;
+}
+#hgDotLineT {
+    top: 689px;
+    width: 111px;
+}
+#hgDotLineB {
+    top: 708px;
+    width: 46px;
+}
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted rgb(237,240,242);
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 200px;
+    font-size: 100%;
+    background-color: rgb(0,0,0);
+    color: rgb(237,240,242);
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 2;
+    top: -50%;
+    left: 105%;
+    
+    /* Fade in tooltip - takes 1 second to go from 0% to 100% opac: */
+    opacity: 0;
+    transition: opacity 1s;
+}
+/* .tooltiptextleft is located to the left of the word */
+.tooltip .tooltiptextleft {
+    visibility: hidden;
+    width: 200px;
+    font-size: 100%;
+    background-color: rgb(0,0,0);
+    color: rgb(237,240,242);
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 2;
+    top: -50%;
+    right: 105%;
+    
+    /* Fade in tooltip - takes 1 second to go from 0% to 100% opac: */
+    opacity: 0;
+    transition: opacity 1s;
+}
+
+.tooltip .tooltiptext::after {
+    content: " ";
+    position: absolute;
+    top: 50%;
+    right: 100%; /* To the left of the tooltip */
+    margin-top: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent black transparent transparent;
+}
+.tooltip .tooltiptextleft::after {
+    content: " ";
+    position: absolute;
+    top: 50%;
+    left: 100%; /* To the right of the tooltip */
+    margin-top: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent transparent black;
+}
+
+.tooltip:hover .tooltiptext, .tooltip:hover .tooltiptextleft {
+    visibility: visible;
+    opacity: 1;
+}
+/* beginning of tooltip black dot line */
+.tooltipb {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+}
+
+.tooltipb .tooltiptext {
+    visibility: hidden;
+    width: 200px;
+    font-size: 100%;
+    background-color: rgb(0,0,0);
+    color: rgb(237,240,242);
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 2;
+    top: -50%;
+    left: 105%;
+    
+    /* Fade in tooltip - takes 1 second to go from 0% to 100% opac: */
+    opacity: 0;
+    transition: opacity 1s;
+}
+
+.tooltipb .tooltiptext::after {
+    content: " ";
+    position: absolute;
+    top: 50%;
+    right: 100%; /* To the left of the tooltip */
+    margin-top: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent black transparent transparent;
+}
+
+.tooltipb:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+/* end of tooltip black dot line */
+
+/* beginning of Welcome Page */
+#wpbkgshade {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 1230px;
+    height: 800px;
+    display: block;
+    background-color: rgba(185,200,211,0.7);
+    z-index: 5; /* will change to -5 after initial appearance */
+}
+#wpwelcomepage {
+    position: absolute;
+    left: 288px;
+    top: 84px;
+    width: 648px;
+}
+#wpbranddesignimg {
+    /* picture size: 648 x 73 */
+    display: block;
+}
+#wpheadpane {
+    margin-top: -1px;
+    width: 648px;
+    height: 31px;
+    font-size: 1.3em;
+    color: rgb(237,240,242);
+    text-align: center;
+    background-color: rgb(0,96,127);
+}
+#wpmainpane {
+    border: 1px solid rgb(185,200,211);
+    width: 608px;
+    padding: 0 19px 19px 19px;
+    font-size: 16px;
+    text-align: justify;
+    background-color: rgb(185,200,211);
+}
+#wpstreamimg {
+    box-shadow: 0 0 5px 5px rgb(77,77,79);
+    width: 512px;
+    height: 241px;
+    border-radius: 8px;
+    vertical-align: middle;
+    display: block;
+    margin: 20px auto auto auto;
+}
+#wpfootpane {
+    width: 648px;
+    height: 30px;
+    font-size: 1.5em;
+    color: rgb(237,240,242);
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    background-color: rgb(0,96,127);
+}
+#wpfootpane:hover {
+    background-color: rgb(55,115,144);
+}
+/* end of Welcome Page */
+/* beginning of toggle switch button */
+#pumponoffswitch {
+    position: absolute;
+    top: 110px;
+    left: 148px;
+}
+.switch {
+    position: relative;
+    display: block;
+    vertical-align: top;
+    width: 120px;
+    height: 30px;
+    padding: 3px;
+    margin: 0 10px 10px 0;
+    background: linear-gradient(to bottom, rgb(237,240,242), white);
+    border-radius: 18px;
+    box-shadow: 0 -1px 1px white inset, 0 1px 1px white inset;
+    cursor: pointer;
+}
+.switchinput {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+}
+.switchlabel {
+    position: relative;
+    display: block;
+    height: inherit;
+    font-size: 14px;
+    text-transform: uppercase;
+    background: rgb(237,240,242);
+    border-radius: inherit;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1) inset, 0 0 2px rgba(0,0,0,0.1) inset;
+}
+.switchlabel:before, .switchlabel:after {
+    position: absolute;
+    top: 50%;
+    margin-top: -.4em;
+    line-height: 1;
+    transition: inherit;
+}
+.switchlabel:before {
+    content: attr(data-off);
+    right: 11px;
+    color: black;
+}
+.switchlabel:after {
+    content: attr(data-on);
+    left: 11px;
+    color: black;
+    opacity: 0;
+}
+.switchinput:checked ~ .switchlabel {
+    background: rgb(238,236,208);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.2) inset, 0 0 3px rgba(0,0,0,0.2) inset;
+}
+.switchinput:checked ~ .switchlabel:before {
+    opacity: 0;
+}
+.switchinput:checked ~ .switchlabel:after {
+    opacity: 1;
+}
+.switchbtn {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    width: 28px;
+    height: 28px;
+    background: linear-gradient(to bottom, white 40%, rgb(237,240,242));
+    border-radius: 100%;
+    box-shadow: 1px 1px 5px rgba(0,0,0,0.2);
+}
+.switchbtn:before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -6px 0 0 -6px;
+    width: 12px;
+    height: 12px;
+    background: linear-gradient(to bottom, rgb(237,240,242), white);
+    border-radius: 6px;
+    box-shadow: 0 1px rgba(0,0,0,0.2) inset;
+}
+.switchinput:checked ~ .switchbtn {
+    left: 94px;
+    box-shadow: -1px 1px 5px rgba(0,0,0,0.2);
+}
+.switchlabel, .switchbtn {
+    transition: All 0.3s ease;
+}
+/* end of toggle switch button */
+/* beginning of Tutorial Page */
+#tutorialpage {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 0;
+    float: left;
+    z-index: -4;
+    background-color: rgba(185,200,211, 0.5);
+}
+
+#tpagetop {
+    width: 1230px;
+    height: 40px;
+    clear: right;
+    background-color: rgba(185,200,211, 0.5);
+}
+#tpageleft {
+    width: 30px;
+    height: 60px;
+    background-color: rgba(185,200,211, 0.5);
+}
+#tpageright {
+    width: 1000px;
+    height: 60px;
+    float: right;
+    background-color: rgba(185,200,211, 0.5);
+}
+#tpagebottom {
+    width: 1230px;
+    height: 700px;
+    clear: left;
+    background-color: rgba(185,200,211, 0.5);
+}
+#tpagesecondl {
+    display: none;
+    width: 722px;
+    height: 206px;
+    background-color: rgba(185,200,211, 0.5);
+}
+#tpagesecondr {
+    display: none;
+    width: 10px;
+    height: 206px;
+    float: right;
+    background-color: rgba(185,200,211, 0.5);
+}
+#tpagesecondb {
+    display: none;
+    width: 1230px;
+    height: 8px;
+    clear: left;
+    background-color: rgba(185,200,211, 0.5);
+}
+#tutorialbox {
+    position: absolute;
+    left: 270px;
+    top: 50px;
+    visibility: visible;
+    padding: 10px;
+    background-color: white;
+    width: 350px;
+    border-radius: 5px;
+    box-shadow: 0 1px 10px rgba(0,0,0,.4);
+    transition: opacity 0.1s ease-out;
+    text-align: justify;
+}
+#tutorialbox > * {
+    display: block;
+    margin-top: 8px;
+}
+#tutorialbox > *:first-child {
+    margin-top: 0px;
+}
+#tutorialbox > *:last-child {
+    margin-top: 20px;
+}
+#tutorialhead {
+    padding: 3px 0;
+    color: white;
+    background-color: rgb(0,96,127);
+    font-weight: bold;
+}
+#tutorialsubhead {
+    color: rgb(0,96,127);
+}
+#tutorialtext > p {
+    margin: 8px 0;
+}
+.tutorialarrowleft {
+    border: 10px solid white;
+    content:'';
+    position: absolute;
+    left: -20px;
+    top: 10px;
+    border-top-color:transparent;
+    border-right-color:white;
+    border-bottom-color:transparent;
+    border-left-color:transparent;
+}
+.tutorialarrowright {
+    border: 10px solid white;
+    content:'';
+    position: absolute;
+    right: -20px;
+    top: 10px;
+    border-top-color:transparent;
+    border-right-color:transparent;
+    border-bottom-color:transparent;
+    border-left-color:white;
+}
+.tutorialbuttons {
+    white-space: nowrap;
+}
+.tutorialbutton {
+    position: relative;
+    display: inline-block;
+    padding: 5px 10px;
+    border: 1px solid rgb(224,229,234);
+    text-decoration: none;
+    font-size: 11px;
+    color: black;
+    cursor: pointer;
+    background-color: rgb(237,240,242);
+    border-radius: 3px;
+    text-align: center;
+}
+.tutorialbutton:hover {
+    background-color: rgb(224,229,234);
+    color: rgb(55,115,144);
+}
+.tutorialbutton:active {
+    background-color: rgb(224,229,234);
+    color: rgb(55,115,144);
+    transform: translateY(2px);
+}
+#tutorialprevious, #tutorialnext {
+    float: right;
+    margin-left: 5px;
+}
+#turorialexit {
+    float: left;
+}
+/* end of Tutorial Page */
+
+.button {
+    display: inline-block;
+    padding: 9px;
+    font-size: 14px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    white-space: nowrap;
+    color: black;
+    background-color: rgb(186,191,51);
+    border: none;
+    border-radius: 5px;
+}
+
+.button:hover {
+    background-color: rgb(199,201,90);
+}
+
+.button:active {
+    background-color: rgb(199,201,90);
+    transform: translateY(4px);
+}
+
+#soundonoff {
+    position: absolute;
+    left: 1174px;
+    top: 182px;
+    height: 34px;
+    width: 40px;
+    background-image: url(images/speechoff.png);
+    background-repeat: no-repeat;
+    display: block;
+    z-index: 10;
+}
+
+#turnontutorial {
+    position: absolute;
+    left: 788px;
+    top: 8px;
+    display: block;
+}
