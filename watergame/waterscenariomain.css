@@ -1,0 +1,521 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+fieldset {
+    border: 0;
+    position: absolute;
+    top: 2px;
+    left: 1024px;
+}
+
+#canvas {
+    width: 1224px;
+    height: 576px;
+    display: block;
+}
+
+#legendarea {
+    position: absolute;
+    border: 1px solid black;
+    left: 1037px;
+    top: 54px;
+    width: 168px;
+    padding: 4px;
+    display: inline-block;
+    font-size: 0.95em;
+    white-space: nowrap;
+    background-color: rgb(185,200,211);
+}
+
+.legendtitle {
+    min-height: 24px;
+    font-weight: bold;
+    text-align: center;
+}
+.legenditem {
+    min-height: 24px;
+}
+.floatleft {
+    float: left;
+}
+.legend16 {
+    padding: 4px 8px 4px 4px;
+}
+.legend24 {
+    padding-right: 4px;
+}
+.legend10 {
+    padding: 3px 12px 3px 7px;
+}
+.legendptop {
+    padding-top: 2px;
+}
+
+#sliderarea {
+    position: absolute;
+    left: 60px;
+    top: 50px;
+    display: inline-block;
+}
+#slider {
+    height: 125px;
+    width: 14px;
+}
+
+.ui-slider.ui-slider-vertical {
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(to right, rgb(85,85,85), rgb(255,255,255), rgb(85,85,85));
+}
+.ui-slider-vertical .ui-slider-handle {
+    left: 1px;
+    width: 12px;
+    height: 16px;
+    margin-bottom: -8px; /* minus half of height */
+    outline: none;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(to right, rgb(0,255,255), rgb(0,68,255), rgb(0,255,255));
+}
+
+.slider-tick {
+    width: 5px; 
+    height: 0; 
+    border: 1px solid black;
+}
+
+#sliderhtick {
+    margin-top: 4px;
+}
+#slidertick2, #sliderltick {
+    margin-top: 25px;
+}
+#slidermtick, #slidertick4 {
+    margin-top: 29px;
+}
+
+.sliderlabel {
+    padding-left: 10px;
+    font-size: 110%;
+    text-align: left;
+    color: rgb(0,0,0);
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.sliderHlabel {
+    margin-top: -4px;
+}
+.sliderLlabel {
+    margin-top: 94px;
+}
+
+#bottomarea {
+    border:1px solid black;
+    width: 1222px;
+    height: 216px;
+    background-color: rgb(0,96,127);
+}
+
+.introduction {
+    width: 572px;
+    font-size: 1.1em;
+    text-align: justify;
+    color: rgb(237,240,242);
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.visW {
+    display: block;
+}
+.visP, .visS {
+    display: none;
+}
+#hydrograph img {
+    /* picture size: 350 x 139 */
+    position: absolute;
+    left: 743px;
+    top: 616px;
+    cursor: pointer;
+    z-index: 1;
+}
+
+#hydrographcanvas {
+    margin: 0;
+    border: none;
+    position: absolute;
+    left: 612px;
+    top: 568px;
+    /* width and height sync with resizeCanvas() in waterhydrograph.js; */
+    width: 612px;
+    height: 216px;
+    display: block;
+    background-color: transparent;
+}
+
+.visPVS {
+    display: none;
+}
+.hgLabel {
+    position: absolute;
+    font-size: 1em;
+    color: rgb(237,240,242);
+    text-align: center;
+    vertical-align: middle;
+    background-color: transparent;
+    white-space: nowrap;
+}
+#lbSflow {
+    -ms-transform: rotate(-90deg); /* IE 9 */
+    -webkit-transform: rotate(-90deg); /* Chrome, Safari, Opera */
+    transform: rotate(-90deg);
+    left: 606px;
+    top: 652px;
+}
+#lbPrec {
+    -ms-transform: rotate(90deg); /* IE 9 */
+    -webkit-transform: rotate(90deg); /* Chrome, Safari, Opera */
+    transform: rotate(90deg);
+    left: 1114px;
+    top: 652px;
+}
+#lbEtime {
+    left: 862px;
+    top: 750px;
+}
+#lgPrec {
+    left: 1072px;
+    top: 578px;
+}
+#lgSflow {
+    left: 1072px;
+    top: 600px;
+}
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted rgb(237,240,242);
+}
+/* .tooltiptext is located to the right of the word; */
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 200px;
+    font-size: 100%;
+    background-color: rgb(0,0,0);
+    color: rgb(237,240,242);
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 2;
+    top: -50%;
+    left: 105%;
+    
+    /* Fade in tooltip - takes 1 second to go from 0% to 100% opac: */
+    opacity: 0;
+    transition: opacity 1s;    
+}
+/* .tooltiptextleft is located to the left of the word */
+.tooltip .tooltiptextleft {
+    visibility: hidden;
+    width: 200px;
+    font-size: 100%;
+    background-color: rgb(0,0,0);
+    color: rgb(237,240,242);
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 2;
+    top: -50%;
+    right: 105%;
+    
+    /* Fade in tooltip - takes 1 second to go from 0% to 100% opac: */
+    opacity: 0;
+    transition: opacity 1s;    
+}
+.tooltip2text::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: black transparent transparent transparent;
+}
+
+.tooltip .tooltiptext::after {
+    content: " ";
+    position: absolute;
+    top: 50%;
+    right: 100%; /* To the left of the tooltip */
+    margin-top: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent black transparent transparent;
+}    
+.tooltip .tooltiptextleft::after {
+    content: " ";
+    position: absolute;
+    top: 50%;
+    left: 100%; /* To the right of the tooltip */
+    margin-top: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent transparent black;
+}    
+
+.tooltip:hover .tooltiptext, .tooltip:hover .tooltiptextleft {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* beginning of Welcome Page */
+#wpbkgshade {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 1230px;
+    height: 800px;
+    display: block;
+    background-color: rgba(185,200,211,0.7);
+    z-index: 5; /* will change to -5 after initial appearance */
+}
+#wpwelcomepage {
+    position: absolute;
+    left: 288px;
+    top: 84px;
+    width: 648px;
+    min-height: 623px;
+}
+#wpbranddesignimg {
+    /* picture size: 648 x 73 */
+    display: block;
+}
+#wpheadpane {
+    margin-top: -1px;
+    width: 648px;
+    height: 31px;
+    font-size: 1.3em;
+    color: rgb(237,240,242);
+    text-align: center;
+    background-color: rgb(0,96,127);
+}
+#wpmainpane {
+    border: 1px solid rgb(185,200,211);
+    width: 608px;
+    padding: 0 19px 19px 19px;
+    font-size: 16px;
+    text-align: justify;
+    background-color: rgb(185,200,211);
+}
+#wpwatercycleimg {
+    box-shadow: 0 0 5px 5px rgb(77,77,79);
+    border-radius: 8px;
+    vertical-align: middle;
+    display: block;
+    margin: 20px auto auto auto;
+}
+#wpfootpane {
+    width: 648px;
+    height: 30px;
+    font-size: 1.5em;
+    color: rgb(237,240,242);
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    background-color: rgb(0,96,127);
+}
+#wpfootpane:hover {
+    background-color: rgb(55,115,144);
+}
+/* end of Welcome Page */
+/* beginning of Tutorial Page */
+#tutorialpage {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 0;
+    float: left;
+    z-index: -4;
+    background-color: rgba(185,200,211, 0.5);
+}
+
+#tpagetop {
+    width: 1230px;
+    height: 40px;
+    clear: right;
+    background-color: rgba(185,200,211, 0.5);
+}
+#tpageleft {
+    width: 50px;
+    height: 150px;
+    background-color: rgba(185,200,211, 0.5);
+}
+#tpageright {
+    width: 950px;
+    height: 150px;
+    float: right;
+    background-color: rgba(185,200,211, 0.5);
+}
+#tpagebottom {
+    width: 1230px;
+    height: 610px;
+    clear: left;
+    background-color: rgba(185,200,211, 0.5);
+}
+#tpagesecondl {
+    display: none;
+    width: 612px;
+    height: 206px;
+    background-color: rgba(185,200,211, 0.5);
+}
+#tpagesecondr {
+    display: none;
+    width: 10px;
+    height: 206px;
+    float: right;
+    background-color: rgba(185,200,211, 0.5);
+}
+#tpagesecondb {
+    display: none;
+    width: 1230px;
+    height: 8px;
+    clear: left;
+    background-color: rgba(185,200,211, 0.5);
+}
+#tutorialbox {
+    position: absolute;
+    left: 270px;
+    top: 50px;
+    visibility: visible;
+    padding: 10px;
+    background-color: white;
+    width: 350px;
+    border-radius: 5px;
+    box-shadow: 0 1px 10px rgba(0,0,0,.4);
+    transition: opacity 0.1s ease-out;
+    text-align: justify;
+}
+#tutorialbox > * {
+    display: block;
+    margin-top: 8px;
+}
+#tutorialbox > *:first-child {
+    margin-top: 0px;
+}
+#tutorialbox > *:last-child {
+    margin-top: 20px;
+}
+#tutorialhead {
+    padding: 3px 0;
+    color: white;
+    background-color: rgb(0,96,127);
+    font-weight: bold;
+}
+#tutorialsubhead {
+    color: rgb(0,96,127);
+}
+#tutorialtext > p {
+    margin: 8px 0;
+}
+.tutorialarrowleft {
+    border: 10px solid white;
+    content:'';
+    position: absolute;
+    left: -20px;
+    top: 10px;
+    border-top-color:transparent;
+    border-right-color:white;
+    border-bottom-color:transparent;
+    border-left-color:transparent;
+}
+.tutorialarrowright {
+    border: 10px solid white;
+    content:'';
+    position: absolute;
+    right: -20px;
+    top: 10px;
+    border-top-color:transparent;
+    border-right-color:transparent;
+    border-bottom-color:transparent;
+    border-left-color:white;
+}
+.tutorialbuttons {
+    white-space: nowrap;
+}
+.tutorialbutton {
+    position: relative;
+    display: inline-block;
+    padding: 5px 10px;
+    border: 1px solid rgb(224,229,234);
+    text-decoration: none;
+    font-size: 11px;
+    color: black;
+    cursor: pointer;
+    background-color: rgb(237,240,242);
+    border-radius: 3px;
+    text-align: center;
+}
+.tutorialbutton:hover {
+    background-color: rgb(224,229,234);
+    color: rgb(55,115,144);
+}
+.tutorialbutton:active {
+    background-color: rgb(224,229,234);
+    color: rgb(55,115,144);
+    transform: translateY(2px);
+}
+#tutorialprevious, #tutorialnext {
+    float: right;
+    margin-left: 5px;
+}
+
+/* end of Tutorial Page */
+
+.button {
+    display: inline-block;
+    padding: 9px;
+    font-size: 14px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    white-space: nowrap;
+    color: black;
+    background-color: rgb(186,191,51);
+    border: none;
+    border-radius: 5px;
+}
+
+.button:hover {
+    background-color: rgb(199,201,90);
+}
+
+.button:active {
+    background-color: rgb(199,201,90);
+    transform: translateY(4px);
+}
+
+#soundonoff {
+    position: absolute;
+    left: 1174px;
+    top: 158px;
+    height: 34px;
+    width: 40px;
+    background-image: url(images/speechoff.png);
+    background-repeat: no-repeat;
+    display: block;
+    z-index: 10;
+}
+
+#turnontutorial {
+    position: absolute;
+    left: 858px;
+    top: 8px;
+    display: block;
+}

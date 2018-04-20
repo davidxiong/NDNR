@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<!--
+	NOTES:
+	1. All tokens are represented by '$' sign in the template.
+	2. You can write your code only wherever mentioned.
+	3. All occurrences of existing tokens will be replaced by their appropriate values.
+	4. Blank lines will be removed automatically.
+	5. Remove unnecessary comments before creating your template.
+-->
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="authoring-tool" content="Adobe_Animate_CC">
+<title>Water Games</title>
+<!-- write your code here -->
+<script src="createjs-2015.11.26.min.js"></script>
+<script src="jquery.min.js"></script>
+<link rel="stylesheet" href="jquery-ui.css">
+<script src="jquery-ui.min.js"></script>
+<link rel="stylesheet" href="waterscenariomain.css">
+<script src="WaterScenes.js"></script>
+<script src="waterraindrops.js"></script>
+<script src="watertutorial.js"></script>
+<script src="waterwelcomepage.js"></script>
+<script src="waterhydrograph.js"></script>
+<script src="waterscenario1.js"></script>
+<script src="waterscenariomain.js"></script>
+<!-- write your code here -->
+</head>
+<body onload="init();">
+<div id="wpbkgshade">
+  <div id="wpwelcomepage">
+    <img id="wpbranddesignimg" src="images/branddesign.png" alt="Brand design elements">
+    <div id="wpheadpane">Interactions Between Surface Water and Groundwater</div>
+    <div id="wpmainpane">
+      <p><b>Welcome!</b><br>NeDNR has developed three computer simulations to illustrate the interaction of surface water and groundwater. To begin, explore how changing the elevation of the water table affects this interaction.</p>
+      <p><b>Water Table</b><br>The purpose of this simulation is to illustrate the interaction between surface water and groundwater, focusing on how the relative position of the <span class="tooltip">water table<span class="tooltiptext">The water table is the upper level of the underground area in which the soil and rocks are saturated with water.</span></span> and stream levels affects the direction of flow and rate of interaction between the stream and the <span class="tooltip">aquifer<span class="tooltiptext">An aquifer is the area saturated with water beneath the water table.</span></span> (i.e., whether a stream is a <span class="tooltip">gaining<span class="tooltiptext">A stream is gaining in reaches where water flows from the aquifer towards the stream.</span></span> or <span class="tooltip">losing stream<span class="tooltiptext">A stream is losing in reaches where water flows from a stream towards the aquifer.</span></span>).</p>
+      <img id="wpwatercycleimg" src="images/wpageW.png" alt="Water cycle illustration">
+    </div>
+    <div id="wpfootpane" onclick="wpdone()">OK</div>
+  </div>
+</div>
+<div>
+  <canvas id="canvas"></canvas>
+  <form action="#">
+    <fieldset>
+      <select name="sceneoptions" id="sceneoptions" autocomplete="off">
+        <option value="Water Table" selected="selected">Water Table</option>
+        <option value="Precipitation">Precipitation</<option>
+        <option value="Soil Texture">Soil Texture</option>
+      </select>
+    </fieldset>
+  </form>
+  <div id="legendarea">
+    <div class="legendtitle">Legend</div>
+    <!-- The classes legend16, legend24 and legend10 are added to adjust the position of these two png files
+         since the sizes of SymWaterTable.png (16x16), SymRunoffArrow.png (24x24), and SymStreamDepth.png (10x32) are different -->
+    <div class="legenditem">
+      <img class="floatleft legend16" src="images/SymWaterTable.png" alt="Water table symbol"><div class="floatleft legendptop">Water Table</div>
+    </div>
+    <div class="legenditem visPVS">
+      <img class="floatleft legend24" src="images/SymRunoffArrow.png" alt="Runoff flow symbol"><div class="floatleft legendptop">Runoff Flow</div>
+    </div>
+    <div class="legenditem visPVS">
+      <img class="floatleft legend16" src="images/SymRechargeArrow.png" alt="Recharge symbol"><div class="floatleft legendptop">Recharge</div>
+    </div>
+    <div class="legenditem">
+      <img class="floatleft legend10" src="images/SymStreamDepth.png" alt="Stream depth symbol"><div class="floatleft">Stream Depth<br>Indicator</div>
+    </div>
+  </div>
+  <div id="sliderarea">
+    <div id="slider" class="floatleft"></div>
+    <div class="floatleft">
+      <div id="sliderhtick" class="slider-tick"></div>
+      <div id="slidertick2" class="slider-tick"></div>
+      <div id="slidermtick" class="slider-tick"></div>
+      <div id="slidertick4" class="slider-tick"></div>
+      <div id="sliderltick" class="slider-tick"></div>
+    </div>
+    <div class="floatleft">
+      <div class="sliderlabel sliderHlabel visW">High Water Table</div>
+      <div class="sliderlabel sliderHlabel visP">Heavy Precipitation</div>
+      <div class="sliderlabel sliderHlabel visS">Coarse Soil Texture</div>
+      <div class="sliderlabel sliderLlabel visW">Low Water Table</div>
+      <div class="sliderlabel sliderLlabel visP">Light Precipitation</div>
+      <div class="sliderlabel sliderLlabel visS">Fine Soil Texture</div>
+    </div>
+  </div>
+  <audio id="MySound" src="audios/wpwt.mp3" preload="auto"></audio>
+  <button id="soundonoff" class="button"></button>
+  <button id="turnontutorial" class="button">Turn On Tutorial Mode</button>
+</div>
+<div id="bottomarea">
+  <p class="visW introduction">Use the slider bar to adjust the <span class="tooltip">water table<span class="tooltiptext">The water table is the upper level of the underground area in which the soil and rocks are saturated with water.</span></span> elevation.<br><br>This simulation shows basic surface water and groundwater interactions. When the water table is above the top of the stream, the <span class="tooltip">aquifer<span class="tooltiptextleft">An aquifer is the area saturated with water beneath the water table.</span></span> replenishes the stream as <span class="tooltip">baseflow<span class="tooltiptext">Baseflow is the portion of streamflow that results in seepage of water from the aquifer.</span></span> (i.e., gaining stream); when the water table is below the top of stream, the water flows out of the stream to the aquifer (i.e., losing stream). When they are at equilibrium, there is flow between the aquifer and the stream, but no net loss or gain to the stream.</p>
+  <p class="visP introduction">Use the slider bar to adjust the intensity of rain.<br><br>This simulation shows that heavier precipitation contributes to higher <span class="tooltip">runoff<span class="tooltiptext">Runoff is water that drains across the surface of an area of land.</span></span> and a slight increase in groundwater <span class="tooltip">recharge<span class="tooltiptextleft">Recharge is a process where water moves downward into groundwater.</span></span>, but lighter precipitation is associated with lower runoff and recharge in a precipitation event. The streamflow increase after a rain event is primarily due to surface runoff. The <span class="tooltip">hydrograph<span class="tooltiptext">This hydrograph is a graph of how precipitation and streamflow change over time.</span></span> to the right shows the streamflow response to differing levels of precipitation. Hover over the hydrograph to learn how to read it.</p>
+  <p class="visS introduction">Click the slider bar to adjust the soil texture.<br><br>This simulation shows that coarser soil texture corresponds with larger pore spaces and more <span class="tooltip">recharge<span class="tooltiptext">Recharge is a process where water moves downward into groundwater.</span></span>, and generates less <span class="tooltip">runoff<span class="tooltiptextleft">Runoff is water that drains across the surface of an area of land.</span></span> under the same precipitation than finer soil texture. Higher recharge corresponds with elevated <span class="tooltip">baseflow<span class="tooltiptext">Baseflow is the portion of streamflow that results in seepage of water from the aquifer.</span></span> and streamflow. The <span class="tooltip">hydrograph<span class="tooltiptextleft">This hydrograph is a graph of how precipitation and streamflow change over time.</span></span> to the right shows the streamflow in response to different soil texture. Hover over the hydrograph to learn how to read it.</p>
+  <p id="hydrograph" class="visW"></p>
+  <p id="lbSflow" class="visPVS hgLabel">Streamflow (cfs)</p>
+  <p id="lbPrec" class="visPVS hgLabel">Precipitation (inches)</p>
+  <p id="lbEtime" class="visPVS hgLabel">Elapsed Time (hours)</p>
+  <p id="lgPrec" class="visPVS hgLabel">Precipitation</p>
+  <p id="lgSflow" class="visPVS hgLabel">Streamflow</p>
+  <canvas id="hydrographcanvas" class="tooltip2"></canvas>
+</div>
+<div id="tutorialpage">
+  <div id="tpagetop"></div>
+  <!-- tpageright (float:right); tpageleft (float:left); they are in one row if we put tpageright before tpageleft -->
+  <div id="tpageright"></div>
+  <div id="tpageleft"></div>
+  <div id="tpagebottom"></div>
+  <div id="tpagesecondr"></div>
+  <div id="tpagesecondl"></div>
+  <div id="tpagesecondb"></div>
+  <div id="tutorialbox">
+    <div id="tutorialhead">Tutorial</div>
+    <div id="tutorialsubhead">Adjust the water table elevation</div>
+    <div id="tutorialtext"><p>Adjust the water table elevation using this slider or by clicking on the slider's labels.</p><p>Watch how the aquifer depth, streamflow, and the direction of groundwater flow change as you adjust the water table elevation.</p></div>
+    <div id="tutorialarrow" class=""></div>
+    <div class="tutorialbuttons">
+      <div id="tutorialnext" class="tutorialbutton">Next</div>
+      <div id="tutorialprevious" class="tutorialbutton">Previous</div>
+      <div id="tutorialexit" class="floatleft tutorialbutton">Exit Tutorial</div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
