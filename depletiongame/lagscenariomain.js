@@ -19,27 +19,30 @@ $( function() {
         $( "#pumpcheck" ).prop("checked", false);
         changepumponoff(lsgame.PumpStatus.PUMPOFF);
     }
+    window.lsgame.resetCompareBtn = function() {
+        $("#btncompare").text("Compare");
+    }
     function changescene(scene) {
+        window.lsgame.initStatus();
         switch (scene) {
             case "Lag Effect":
                 lsgame.currentScene = lsgame.LagScenes.LAGEFFECT;
                 $( ".visL" ).show();
                 $( ".visS" ).hide();
-                if (lsgame.PrevWell.x != -1 || lsgame.PrevWell.y != -1) {
+                if (lsgame.PrevWell.prevArea != null) {
                     lsgame.removeWellUnity();
                 }
                 if (lsgame.TimeLag.tlContainer == null) {
                     drawTimeLagOff();
                 }
                 break;
-            case "SDF":
+            case "Depletion Factor":
                 lsgame.currentScene = lsgame.LagScenes.SDF;
                 $( ".visL" ).hide();
                 $( ".visS" ).show();
                 clearTimeLag();
                 break;
         }
-        window.lsgame.initStatus();
         showwpage(scene);
     }
     function changepumponoff(pumponoff) {
@@ -58,19 +61,17 @@ $( function() {
             else if (lsgame.currentLocation == lsgame.WellLocation.FAR) {
                 exportRoot.gotoAndStop("GFAROFF");
             }
-            else if (lsgame.currentLocation == lsgame.WellLocation.MIDDLE) {
-                exportRoot.gotoAndStop("GMIDDLEOFF");
-            }
         }
         else {
+            if (stageHG.contains(lsgame.TimeLag.tlCompContainer)) {
+                stageHG.removeChild(lsgame.TimeLag.tlCompContainer);
+                lsgame.resetCompareBtn();
+            }
             if (lsgame.currentLocation == lsgame.WellLocation.NEAR) {
                 exportRoot.gotoAndPlay("GNEARON");
             }
             else if (lsgame.currentLocation == lsgame.WellLocation.FAR) {
                 exportRoot.gotoAndPlay("GFARON");
-            }
-            else if (lsgame.currentLocation == lsgame.WellLocation.MIDDLE) {
-                exportRoot.gotoAndPlay("GMIDDLEON");
             }
         }
     }
@@ -119,36 +120,32 @@ $( function() {
         }
     });
     $( "#sdfareacanvas" ).on("mousemove", function(event) {
-        if (lsgame.SdfArea.saCurrent != null) {
-            if (lsgame.SdfArea.saCurrent.hitTest(event.pageX, event.pageY)) {
-                return;
-            }
-            else {
-                lsgame.SdfArea.saContainer.addChild(lsgame.SdfArea.saCurrent);
-                lsgame.SdfArea.saCurrent = null;
-            }
-        }
-        var sdfarea = findSdfArea(event.pageX, event.pageY);
-        if (sdfarea != null) {
-            lsgame.SdfArea.saCurrent = sdfarea;
-            stageSA.addChild(lsgame.SdfArea.saCurrent);
-        }
+        mouseMoveOnSdfAreas(event.pageX, event.pageY);
     });
     $( "#btntenfifty" ).on("click", function() {
         var txt = $("#btntenfifty").text();
         if (txt.indexOf("Show") >= 0) {
             $("#btntenfifty").text("Hide 10/50 Area");
-            stageSA.addChild(lsgame.SdfArea.saContainer);
+            stageSA.addChild(lsgame.SdfArea.saTenFifty);
         }
         else {
             $("#btntenfifty").text("Show 10/50 Area");
-            stageSA.removeChild(lsgame.SdfArea.saContainer);
+            stageSA.removeChild(lsgame.SdfArea.saTenFifty);
         }
     });
     $( "#hydrographcanvas" ).on("click", function(event) {
         clearHotSpot();
     });
     $( "#btncompare" ).on("click", function() {
+        var txt = $("#btncompare").text();
+        if (txt.indexOf("Cancel") >= 0) {
+            $("#btncompare").text("Compare");
+            stageHG.removeChild(lsgame.TimeLag.tlCompContainer);
+        }
+        else {
+            $("#btncompare").text("Cancel");
+            stageHG.addChild(lsgame.TimeLag.tlCompContainer);
+        }
     });
     $( "#pumpcheck" ).on("click", function() {
         // pump on;
@@ -163,7 +160,7 @@ $( function() {
 } );
 
 window.lsgame.initStatus = function () {
-    lsgame.nearWellLocation();
+    lsgame.farWellLocation();
     lsgame.offPumpStatus();
 }
 

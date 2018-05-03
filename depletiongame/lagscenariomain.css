@@ -130,11 +130,11 @@ fieldset {
     position: absolute;
     border: 1px solid black;
     left: 0;
-    top: 576px;
+    top: 496px;
     width: 1222px;
-    height: 216px;
+    height: 296px;
     background-color: rgb(0,96,127);
-    z-index: -1;
+    z-index: 1;
 }
 
 .introduction {
@@ -153,9 +153,40 @@ fieldset {
     top: 0;
     /* width and height sync with resizeCanvas() in laghydrograph.js; */
     width: 612px;
-    height: 216px;
+    height: 296px;
     display: block;
     background-color: transparent;
+}
+
+.hgLabel {
+    position: absolute;
+    font-size: 1em;
+    color: rgb(237,240,242);
+    text-align: center;
+    vertical-align: middle;
+    background-color: transparent;
+    white-space: nowrap;
+}
+#lbStreamD {
+    -ms-transform: rotate(-90deg); /* IE 9 */
+    -webkit-transform: rotate(-90deg); /* Chrome, Safari, Opera */
+    transform: rotate(-90deg);
+    left: 592px;
+    top: 70px;
+}
+#lbTime {
+    left: 1022px;
+    top: 155px;
+}
+#lbCurveN {
+    font-size: 0.9em;
+    left: 1067px;
+    top: 8px;
+}
+#lbCurveF {
+    font-size: 0.9em;
+    left: 1067px;
+    top: 38px;
 }
 
 .tooltip {
@@ -235,7 +266,7 @@ fieldset {
     top: 0;
     /* width and height sync with resizeCanvas() in lagsdfarea.js; */
     width: 1224px;
-    height: 580px;
+    height: 496px;
     display: block;
     background: url('./images/DR.png');
     background-color: rgba(55,115,144,0.7);
@@ -274,17 +305,10 @@ fieldset {
 
 #btncompare {
     position: absolute;
-    left: 1130px;
+    left: 1110px;
     top: 740px;
     display: block;
-}
-
-.wellbase {
-    position: absolute;
-    margin: 0;
-    width: 30px;
-    height: 30px;
-    background-color: yellow;
+    padding: 3px 6px;
 }
 
 .well {

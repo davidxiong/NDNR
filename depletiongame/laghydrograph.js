@@ -16,7 +16,7 @@ function initHydrograph() {
         resizeCanvas();
         function resizeCanvas() {
             // width and height sync with #hydrographcanvas in lagscenariomain.css;
-            var w = 612, h = 216;
+            var w = 612, h = 296;
             var iw = window.innerWidth, ih=window.innerHeight;
             var pRatio = window.devicePixelRatio || 1, xRatio=iw/w, yRatio=ih/h, sRatio=1;
             if(isResp) {
@@ -121,13 +121,13 @@ function drawAxes(container, xL, xR, yT, yB) {
     // draw boundary sdf label in axis y;
     var xValue;
     var yValue;
-    var xIdx = lsgame.PrevWell.x;
     var sdf = lsgame.PrevWell.SDF;
     var yBoundary = lsgame.CONSTS.Y_MAX - 9 * Math.sqrt(lsgame.CONSTS.X_NUM_POINTS) * sdf / 100;
-    // mixed with "SDF" label when lsgame.PrevWell.x == 7,8,9;
-    if (xIdx == 7 || xIdx == 8 || xIdx == 9) {
+    // mixed with "SDF" label if the sdf value is in 40 - 70;
+    if (sdf > 40 && sdf < 70) {
         xValue = xL + 15;
         yValue = yBoundary - 8;
+        
     }
     else {
         xValue = xL / 2 + 10;
@@ -275,8 +275,7 @@ function drawHydroGraphs() {
 }
 
 function clearHydroGraphs() {
-    window.lsgame.PrevWell.x = -1;
-    window.lsgame.PrevWell.y = -1;
+    window.lsgame.PrevWell.prevArea = null;
     window.lsgame.PrevWell.SDF = 0;
     window.lsgame.PrevWell.posArray = [];
     window.lsgame.HotSpot.dotContainer = null;

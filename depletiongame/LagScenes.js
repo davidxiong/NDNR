@@ -21,15 +21,6 @@
         BLACK: "rgb(0,0,0)"
     }
     var CONSTS = {
-        OFFSET_X: 24,
-        OFFSET_Y: 56,
-        W_OUTSIDE: 60,
-        H_OUTSIDE: 60,
-        W_WELL: 32,
-        H_WELL: 48,
-        W_UNITS_TO_RIVER: 16,
-        // 100 / 16 = 6.25
-        W_SDF_UNIT_DIFF: 6.25,
         X_NUM_POINTS: 300,
         X_MIN: 50,
         Y_MAX: 180,
@@ -54,8 +45,7 @@
         MAX_YEAR: 50
     }
     var PrevWell = {
-        x: -1,
-        y: -1,
+        prevArea: null,
         SDF: 0,
         posArray: []
     }
@@ -64,10 +54,14 @@
         barContainer: null
     }
     var TimeLag = {
-        TL_OX: 50,
-        TL_OY: 180,
+        TL_OX: 60,
+        TL_OXR: 380,
+        TL_OY: 10,
+        TL_OYB: 180,
+        tlCompContainer: null,
         // equal to the maximum frames
-        TL_X_POINTS: 160,
+        TL_NX_POINTS: 160,
+        TL_FX_POINTS: 320,
         tlPrevPoint: 0,
         tlContainer: null,
         tlShape: null,
@@ -75,8 +69,9 @@
         lagArrF: []
     }
     var SdfArea = {
-        saContainer: null,
-        saCurrent: null
+        saAreas: [],
+        saCurArea: null,
+        saTenFifty: null
     }
     
     window.lsgame.LagScenes = LagScenes;
